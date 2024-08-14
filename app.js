@@ -1,14 +1,11 @@
 const express = require('express');
 const app = express();
-const connectDB = require('./db'); // No es necesario conectar a la base de datos en MySQL de esta forma
+const productRoutes = require('./routes/products');
 
 app.use(express.json());
 
-// Importar y usar las rutas
-const productRoutes = require('./routes/products');
-app.use('/api/products', productRoutes);
+// Usar las rutas de productos
+app.use('/api', productRoutes);
 
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
